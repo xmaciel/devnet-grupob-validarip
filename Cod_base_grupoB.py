@@ -1,6 +1,9 @@
 # Função validaip que retorna uma lista (bool, informativo, lista com os quatro octetos)
 # Parâmetros esperados: IP da rede e o nome do Roteador
 #
+# Premissas:
+#  - só pode ser um IP de classe A, B ou C privada
+#
 # Validação do IP:
 #
 #  1. Verifica se o IP tem três pontos
@@ -71,14 +74,11 @@ def validaip_rfc1918(ip, roteador):
     return [False, 'Seu IP de rede deve ser do tipo privado, seguindo o padrão da RFC 1918. Fonte: https://www.rfc-editor.org/rfc/rfc1918.html']
 
   # Validando o IP final do router
-  if roteador.count('-') != 1:
-    return [False, 'No nome do roteador não tem traço.']
-  roteador = roteador.split('-')
-  host = roteador[1]
-  if len(host) > 3 or not host.isdigit():
+  if len(roteador) > 3 or not roteador.isdigit() or int(roteador) >= 255 or int(roteador) <= 0:
     return [False, "O número do roteador não está no padrão IPv4."]
 
   # Substituindo o último octeto da rede pelo número do Router
-  octeto[3] = int(host)
+  octeto[3] = int(roteador)
   
-  return [True, 'IP de rede Validado!', octeto] 
+  return [True, 'IP de rede Validado!', octeto]
+  
