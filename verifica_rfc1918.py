@@ -13,7 +13,7 @@
 #  7. Troca do último octeto da rede pelo número do Router
 
 
-def validaip(ip, roteador):
+def validaip_rfc1918(ip, roteador):
 
   # verifica se existem três pontos
   if ip.count('.') != 3:
