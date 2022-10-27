@@ -12,7 +12,7 @@
 #  7. Troca do último octeto da rede pelo número do Router
 
 
-def validaipsemrfc1918(ip, roteador):
+def validaip(ip, roteador):
 
   # verifica se existem três pontos
   if ip.count('.') != 3:
@@ -45,16 +45,3 @@ def validaipsemrfc1918(ip, roteador):
   octeto[3] = int(host)
   
   return [True, 'IP de rede Validado!', octeto] 
-
-
-#teste que o grupo A precisa fazer
-router = 'Router-15'
-seuip = "192.168.009.-0"
-resultado = validaip(seuip, router)
-
-if resultado[0] == False:
-  print(resultado[1])
-elif resultado[0] == True:
-  print(resultado[1], resultado[2])
-else:
-  print('Retorno da função validaip não esperado.')
