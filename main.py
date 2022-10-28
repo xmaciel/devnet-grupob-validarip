@@ -9,11 +9,11 @@ i = 1
 while i < 4:
   seuip = input('Qual o IP da rede do Site? \n')
   print('\n')
-  resultado = validaip_rfc1918(seuip, router)  
-  if resultado[0] == False:
-    print(resultado[1],'\n')
-  elif resultado[0] == True:
-    print(resultado[1], resultado[2],'\n')
+  lista_ip = validaip_rfc1918(seuip, router)  
+  if lista_ip[0] == False:
+    print(lista_ip[1],'\n')
+  elif lista_ip[0] == True:
+    print(lista_ip[1], lista_ip[2],'\n')
     break
   else:
     print('Retorno da função validaip não esperado.')
