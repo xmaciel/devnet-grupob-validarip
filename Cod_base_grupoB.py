@@ -29,7 +29,7 @@ def validaip_rfc1918(ip, roteador):
     if len(octeto[i]) > 3:
       return [False, f'O octeto da posição {i+1} tem mais de três digitos.']
     if not octeto[i].isdigit():
-      return [False, f'O octeto da posição {i+1} não é um número inteiro.']
+      return [False, f'O octeto da posição {i+1} não é um número inteiro positivo.']
     else:
       # converte os octetos em inteiros
       octeto[i] = int(octeto[i])   
