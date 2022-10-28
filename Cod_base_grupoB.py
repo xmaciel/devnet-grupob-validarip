@@ -34,6 +34,10 @@ def validaip_rfc1918(ip, roteador):
       # converte os octetos em inteiros
       octeto[i] = int(octeto[i])   
 
+  # Módulo do último octeto para saber se é uma rede válida
+  # pois o último octeto deve ser um número par
+  parouimpar = octeto[3] % 2
+
   # Classe A Privada
   if octeto[0] == 10:
     # Segundo octeto
@@ -43,8 +47,8 @@ def validaip_rfc1918(ip, roteador):
     if octeto[2] < 0 or octeto[2] > 255:
       return [False, 'O terceiro octeto deve ser um inteiro entre 0 e 255']
     # Quarto octeto
-    if octeto[3] < 0 or octeto[3] > 252:
-      return [False, 'O quarto octeto deve ser um inteiro entre 0 e 252']
+    if octeto[3] < 0 or octeto[3] > 252 or parouimpar != 0:
+      return [False, 'O quarto octeto deve ser um inteiro par entre 0 e 252']
 
   # Classe B Privada
   elif octeto[0] == 172:
@@ -55,8 +59,8 @@ def validaip_rfc1918(ip, roteador):
     if octeto[2] < 0 or octeto[2] > 255:
       return [False, 'O quarto octeto deve ser um inteiro entre 0 e 252']
     # Quarto octeto
-    if octeto[3] < 0 or octeto[3] > 252:
-      return [False, 'O quarto octeto deve ser um inteiro entre 0 e 252']
+    if octeto[3] < 0 or octeto[3] > 252 or parouimpar != 0:
+      return [False, 'O quarto octeto deve ser um inteiro par entre 0 e 252']
 
   # Classe C Privada
   elif octeto[0] == 192:
@@ -67,11 +71,11 @@ def validaip_rfc1918(ip, roteador):
     if octeto[2] < 0 or octeto[2] > 255:
       return [False, 'O terceiro octeto deve ser um inteiro entre 0 e 255']
     # Quarto octeto
-    if octeto[3] < 0 or octeto[3] > 252:
-      return [False, 'O quarto octeto deve ser um inteiro entre 0 e 252']
+    if octeto[3] < 0 or octeto[3] > 252 or parouimpar != 0:
+      return [False, 'O quarto octeto deve ser um inteiro par entre 0 e 252']
       
   else:
-    return [False, 'Seu IP de rede deve ser do tipo privado, seguindo o padrão da RFC 1918. Fonte: https://www.rfc-editor.org/rfc/rfc1918.html']
+    return [False, 'Seu IP de rede deve ser do tipo privado de calsse A, B ou C, seguindo o padrão da RFC 1918. Fonte: https://www.rfc-editor.org/rfc/rfc1918.html']
 
   # Validando o IP final do router
   if len(roteador) > 3 or not roteador.isdigit() or int(roteador) >= 255 or int(roteador) <= 0:
